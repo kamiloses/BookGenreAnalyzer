@@ -1,4 +1,5 @@
-﻿using Microsoft.ML.Data;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.ML.Data;
 
 namespace BookGenreAnalyzer.Models;
 //https://sii.pl/blog/ml-net-uczenie-maszynowe-w-wydaniu-microsoftu/

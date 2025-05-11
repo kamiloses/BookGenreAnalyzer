@@ -1,5 +1,6 @@
-﻿namespace BookGenreAnalyzer.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace BookGenreAnalyzer.Models;
 public class BookPrediction
 {
     public string Text { get; set; }         
