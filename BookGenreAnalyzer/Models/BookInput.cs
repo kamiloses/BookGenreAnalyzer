@@ -5,6 +5,5 @@ namespace BookGenreAnalyzer.Models;
 public class BookInput
 {
     
-    [ColumnName("PredictedLabel")]
-    public string PredictedGenre { get; set; }
+    public string TextFragment { get; set; }
 }

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookGenreAnalyzer.Models;
+
 public class BookPrediction
 {
-    public string Text { get; set; }         
-    public string Genre { get; set; }   
+    [Column("PredictedLabel")]
+    public string Genre { get; set; }
 }
