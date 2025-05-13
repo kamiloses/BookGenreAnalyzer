@@ -16,4 +16,8 @@
       <PackageReference Include="Microsoft.ML" Version="5.0.0-preview.1.25127.4" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Service\" />
+    </ItemGroup>
+
 </Project>
