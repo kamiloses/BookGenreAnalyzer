@@ -9,11 +9,13 @@ public class BookController : ControllerBase
 {
     private readonly DataLoader _dataLoader;
     private readonly MLTraining _mlTraining;
+    private readonly MLPredicotService _predicotService;
 
-    public BookController(DataLoader dataLoader, MLTraining mlTraining)
+    public BookController(DataLoader dataLoader, MLTraining mlTraining, MLPredicotService predicotService)
     {
         _dataLoader = dataLoader;
         _mlTraining = mlTraining;
+        _predicotService = predicotService;
     }
 
     [HttpPost("predict")]
@@ -22,7 +24,7 @@ public class BookController : ControllerBase
         if (string.IsNullOrWhiteSpace(request.TextFragment))
             return BadRequest("TextFragment is required.");
 
-        var genre = _dataLoader.PredictGenre(request.TextFragment);
+        var genre = _predicotService.PredictGenre(request.TextFragment);
         
         
         return Ok("DZIAŁA "+genre);

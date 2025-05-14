@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<DataLoader>();
 builder.Services.AddSingleton<MLTraining>();
 builder.Services.AddSingleton<MLContext>();
+builder.Services.AddSingleton<MLPredicotService>();
 var app = builder.Build();
 
 app.MapControllers();

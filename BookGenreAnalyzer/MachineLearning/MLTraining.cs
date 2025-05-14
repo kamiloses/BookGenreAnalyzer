@@ -15,16 +15,18 @@ public class MLTraining
     
     
     
-    private DataLoader _dataLoader;
     private MLContext _mlContext;
-    
-    public MLTraining(DataLoader dataLoader, MLContext mlContext)
+    private MLPredicotService _predicotService;
+    private DataLoader _dataLoader;
+
+    public MLTraining(MLContext mlContext, MLPredicotService predicotService, DataLoader dataLoader)
     {
-        _dataLoader = dataLoader;
         _mlContext = mlContext;
+        _predicotService = predicotService;
+        _dataLoader = dataLoader;
     }
-    
-    
+
+
     private IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimator<ITransformer> pipeline)
     {
         return pipeline
@@ -40,7 +42,7 @@ public class MLTraining
         var trainingData = _mlContext.Data.LoadFromTextFile<BookInformation>(
             _trainingPath, hasHeader: true);
 
-        var pipeline = _dataLoader.ProcessData();
+        var pipeline = _dataLoader.LoadDataFromTSV();
 
         var trainedModel = BuildAndTrainModel(trainingData, pipeline).Fit(trainingData);
 
