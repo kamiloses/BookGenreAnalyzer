@@ -1,14 +1,16 @@
 using BookGenreAnalyzer.Data;
-using BookGenreAnalyzer.ML;
+using BookGenreAnalyzer.MachineLearning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<DataLoader>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 builder.Services.AddSingleton<DataLoader>();
+builder.Services.AddSingleton<MLTraining>();
+builder.Services.AddSingleton<MLContext>();
 var app = builder.Build();
 
 app.MapControllers();

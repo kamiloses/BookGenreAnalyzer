@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <Folder Include="Service\" />
+      <Folder Include="wwwroot\ZIPFiles\" />
     </ItemGroup>
 
     <ItemGroup>

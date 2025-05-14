@@ -1,7 +1,5 @@
 ﻿using BookGenreAnalyzer.DTOs;
-using BookGenreAnalyzer.ML;
-using BookGenreAnalyzer.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
+using BookGenreAnalyzer.MachineLearning;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookGenreAnalyzer.Controller;
@@ -10,10 +8,12 @@ namespace BookGenreAnalyzer.Controller;
 public class BookController : ControllerBase
 {
     private readonly DataLoader _dataLoader;
+    private readonly MLTraining _mlTraining;
 
-    public BookController(DataLoader dataLoader)
+    public BookController(DataLoader dataLoader, MLTraining mlTraining)
     {
         _dataLoader = dataLoader;
+        _mlTraining = mlTraining;
     }
 
     [HttpPost("predict")]
@@ -31,7 +31,7 @@ public class BookController : ControllerBase
     [HttpPost("train")]
     public IActionResult TrainModel()
     {
-        _dataLoader.TrainAndSaveModel();
+        _mlTraining.TrainAndSaveModel();
         return Ok("Model trained and saved.");
     }
 

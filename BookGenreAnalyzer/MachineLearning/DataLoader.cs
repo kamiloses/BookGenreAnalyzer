@@ -2,15 +2,13 @@
 using BookGenreAnalyzer.Models;
 using Microsoft.ML;
 
-namespace BookGenreAnalyzer.ML;
+namespace BookGenreAnalyzer.MachineLearning;
+
 
 public class DataLoader
 {
-    private readonly string _trainingPath =
-        "C:\\Users\\kamil\\RiderProjects\\BookGenreAnalyzer\\BookGenreAnalyzer\\Models\\generated_stories_english.tsv";
-
     private readonly string _modelFilePath =
-        "C:\\Users\\kamil\\RiderProjects\\BookGenreAnalyzer\\BookGenreAnalyzer\\Models\\generated_stories_english.zip";
+        "C:\\Users\\kamil\\RiderProjects\\BookGenreAnalyzer\\BookGenreAnalyzer\\wwwroot\\ZIPFiles\\generated_stories_english.zip";
 
     private readonly MLContext _mlContext;
 
@@ -18,31 +16,13 @@ public class DataLoader
     {
         _mlContext = new MLContext(seed: 0);
     }
+    
 
-    public void TrainAndSaveModel()
-    {
-        var trainingData = _mlContext.Data.LoadFromTextFile<BookInformation>(
-            _trainingPath, hasHeader: true);
-
-        var pipeline = ProcessData();
-
-        var trainedModel = BuildAndTrainModel(trainingData, pipeline).Fit(trainingData);
-
-        _mlContext.Model.Save(trainedModel, trainingData.Schema, _modelFilePath);
-    }
-
-    private IEstimator<ITransformer> ProcessData()
+    internal IEstimator<ITransformer> ProcessData()
     {
         return _mlContext.Transforms.Conversion
             .MapValueToKey(inputColumnName: "Genre", outputColumnName: "Label") 
             .Append(_mlContext.Transforms.Text.FeaturizeText(inputColumnName: "TextFragment", outputColumnName: "Features"))
-            .AppendCacheCheckpoint(_mlContext);
-    }
-    private IEstimator<ITransformer> BuildAndTrainModel(IDataView trainingDataView, IEstimator<ITransformer> pipeline)
-    {
-        return pipeline
-            .Append(_mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy("Label", "Features"))
-            .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"))
             .AppendCacheCheckpoint(_mlContext);
     }
     public string PredictGenre(string textFragment)
@@ -61,4 +41,8 @@ public class DataLoader
         Console.WriteLine($"Predicted genre: {prediction.Genre}");
         return prediction.Genre;
     }
+    
+    
+    
+    
 }
