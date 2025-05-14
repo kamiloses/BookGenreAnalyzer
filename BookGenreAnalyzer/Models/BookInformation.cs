@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.ML;
-using Microsoft.ML.Data;
+﻿using Microsoft.ML.Data;
 
 namespace BookGenreAnalyzer.Models;
 

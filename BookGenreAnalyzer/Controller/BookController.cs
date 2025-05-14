@@ -1,4 +1,5 @@
-﻿using BookGenreAnalyzer.ML;
+﻿using BookGenreAnalyzer.DTOs;
+using BookGenreAnalyzer.ML;
 using BookGenreAnalyzer.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ public class BookController : ControllerBase
     }
 
     [HttpPost("predict")]
-    public ActionResult<string> PredictGenre([FromBody] BookInputDTO request)
+    public ActionResult<string> PredictGenre([FromBody] BookInputDto request)
     {
         if (string.IsNullOrWhiteSpace(request.TextFragment))
             return BadRequest("TextFragment is required.");

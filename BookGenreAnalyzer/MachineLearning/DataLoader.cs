@@ -1,4 +1,5 @@
-﻿using BookGenreAnalyzer.Models;
+﻿using BookGenreAnalyzer.DTOs;
+using BookGenreAnalyzer.Models;
 using Microsoft.ML;
 
 namespace BookGenreAnalyzer.ML;
@@ -48,7 +49,7 @@ public class DataLoader
     {
         ITransformer trainedModel = _mlContext.Model.Load(_modelFilePath, out var modelInputSchema);
 
-        var predictionEngine = _mlContext.Model.CreatePredictionEngine<BookInformation, BookPredictionDTO>(trainedModel);
+        var predictionEngine = _mlContext.Model.CreatePredictionEngine<BookInformation, BookPredictionDto>(trainedModel);
 
         var sample = new BookInformation
         {
