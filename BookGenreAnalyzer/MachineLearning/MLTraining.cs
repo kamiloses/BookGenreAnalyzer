@@ -48,4 +48,27 @@ public class MLTraining
 
         _mlContext.Model.Save(trainedModel, trainingData.Schema, _modelFilePath);
     }
+    
+    
+    //todo podtem gdzieś indziej daj
+    public string GetRandomTitleByGenre(string genre)
+    {
+        var dataView = _mlContext.Data.LoadFromTextFile<BookInformation>(
+            _trainingPath, hasHeader: true, separatorChar: '\t');
+
+        var data = _mlContext.Data.CreateEnumerable<BookInformation>(dataView, reuseRowObject: false).ToList();
+
+        var filtered = data
+            .Where(x => string.Equals(x.Genre?.Trim(), genre.Trim(), StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (filtered.Count == 0)
+            return $"No titles found for genre: {genre}";
+
+        var random = new Random();
+        var randomTitle = filtered[random.Next(filtered.Count)].Title;
+
+        return randomTitle;
+    }
+    
 }

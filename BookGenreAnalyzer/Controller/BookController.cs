@@ -37,5 +37,13 @@ public class BookController : ControllerBase
         return Ok("Model trained and saved.");
     }
 
+
+    [HttpGet("recommend/{genre}")]
+    public String recommendBook([FromRoute] String genre)
+    {
+       return _mlTraining.GetRandomTitleByGenre(genre);
+
+    }
+    
     
 }

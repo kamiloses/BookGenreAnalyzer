@@ -33,4 +33,6 @@ public class MLPredicotService
         Console.WriteLine($"Predicted genre: {prediction.Genre}");
         return prediction.Genre;
     }
+    
+    
 }
