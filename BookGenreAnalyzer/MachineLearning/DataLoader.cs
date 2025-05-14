@@ -48,15 +48,16 @@ public class DataLoader
     {
         ITransformer trainedModel = _mlContext.Model.Load(_modelFilePath, out var modelInputSchema);
 
-        var predictionEngine = _mlContext.Model.CreatePredictionEngine<BookInformation, BookPrediction>(trainedModel);
+        var predictionEngine = _mlContext.Model.CreatePredictionEngine<BookInformation, BookPredictionDTO>(trainedModel);
 
         var sample = new BookInformation
         {
-            Title = "", // nieużywane
+            Title = "", 
             TextFragment = textFragment
         };
 
         var prediction = predictionEngine.Predict(sample);
+        Console.WriteLine($"Predicted genre: {prediction.Genre}");
         return prediction.Genre;
     }
 }

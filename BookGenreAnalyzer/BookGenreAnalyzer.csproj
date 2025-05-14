@@ -20,4 +20,8 @@
       <Folder Include="Service\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="wwwroot\TSVFiles\generated_stories_english.tsv" />
+    </ItemGroup>
+
 </Project>

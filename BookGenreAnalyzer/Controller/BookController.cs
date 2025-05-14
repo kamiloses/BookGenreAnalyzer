@@ -16,13 +16,15 @@ public class BookController : ControllerBase
     }
 
     [HttpPost("predict")]
-    public ActionResult<string> PredictGenre([FromBody] BookInput request)
+    public ActionResult<string> PredictGenre([FromBody] BookInputDTO request)
     {
         if (string.IsNullOrWhiteSpace(request.TextFragment))
             return BadRequest("TextFragment is required.");
 
         var genre = _dataLoader.PredictGenre(request.TextFragment);
-        return Ok(genre);
+        
+        
+        return Ok("DZIAŁA "+genre);
     }
     
     [HttpPost("train")]
