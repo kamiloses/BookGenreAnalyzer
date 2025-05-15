@@ -1,7 +1,7 @@
 ﻿using BookGenreAnalyzer.MachineLearning;
 using Microsoft.ML;
 
-namespace BookGenreAnalyzer.Service;
+namespace BookGenreAnalyzer.Services;
 
 public class BookGenreService
 {

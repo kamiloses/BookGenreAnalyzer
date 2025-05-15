@@ -1,10 +1,10 @@
 ﻿using BookGenreAnalyzer.DTOs;
-using BookGenreAnalyzer.MachineLearning;
-using BookGenreAnalyzer.Service;
+using BookGenreAnalyzer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookGenreAnalyzer.Controller;
-[Route("[controller]")]
+[Route("/api/[controller]")]
 [ApiController]
 public class BookController : ControllerBase
 {
@@ -29,6 +29,7 @@ public class BookController : ControllerBase
     }
     
     [HttpPost("train")]
+  //  [Authorize(Roles = "Admin")]
     public IActionResult TrainModel()
     {
         _bookGenreService.TrainModel();

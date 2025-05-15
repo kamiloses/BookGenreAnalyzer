@@ -1,6 +1,8 @@
 using BookGenreAnalyzer.Data;
 using BookGenreAnalyzer.MachineLearning;
-using BookGenreAnalyzer.Service;
+using BookGenreAnalyzer.Models;
+using BookGenreAnalyzer.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
 
@@ -10,6 +12,17 @@ builder.Services.AddSingleton<MLContext>().AddSingleton<MlDataLoader>().AddSingl
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
+
+
+builder.Services.AddIdentity<User, IdentityRole<int>>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/api/user/login";
+});
 
 var app = builder.Build();
 
