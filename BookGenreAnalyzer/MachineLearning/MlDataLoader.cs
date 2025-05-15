@@ -16,7 +16,7 @@ public class MlDataLoader
     }
     
     
-    internal IEstimator<ITransformer> LoadDataFromTSV()
+    public IEstimator<ITransformer> LoadDataFromTSV()
     {
         return _mlContext.Transforms.Conversion
             .MapValueToKey(inputColumnName: "Genre", outputColumnName: "Genre") 
@@ -28,7 +28,7 @@ public class MlDataLoader
     
     
     public string GetRandomTitleByGenre(string genre)
-    {
+    { 
         var dataView = _mlContext.Data.LoadFromTextFile<BookInformation>(
             "C:\\Users\\kamil\\RiderProjects\\BookGenreAnalyzer\\BookGenreAnalyzer\\wwwroot\\TSVFiles\\generated_stories_english.tsv", hasHeader: true, separatorChar: '\t');
 
