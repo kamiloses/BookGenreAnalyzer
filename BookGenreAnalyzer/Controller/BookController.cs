@@ -29,7 +29,7 @@ public class BookController : ControllerBase
     }
     
     [HttpPost("train")]
-  //  [Authorize(Roles = "Admin")]
+    [Authorize]
     public IActionResult TrainModel()
     {
         _bookGenreService.TrainModel();
