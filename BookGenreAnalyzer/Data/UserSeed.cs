@@ -8,6 +8,7 @@ public class UserSeed
 
 private readonly UserManager<User> _userManager;
 
+
 public UserSeed(UserManager<User> userManager)
 {
     _userManager = userManager;
@@ -20,11 +21,12 @@ public async Task seedTheUser()
     {
        await _userManager.DeleteAsync(user);
     }
+    
 
     
-            string password = "Kamiloses123!";
-            var newUser = new User { UserName = "Kamiloses" };
-
+    
+        User newUser = new User() { UserName = "Kamiloses" };
+         string password = "Kamiloses123!";
             Task<IdentityResult> savedUser= _userManager.CreateAsync(newUser, password);
             Console.BackgroundColor = ConsoleColor.Green;      
             Console.WriteLine(savedUser.Result);
