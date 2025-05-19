@@ -14,10 +14,9 @@ public class MlDataLoaderTest
     {
         _mlDataLoader = new MlDataLoader();
     }
-
-
+    
     [Fact]
-    public void LoadDataFromTSV_ShouldReturnEstimator()
+    public void Should_Load_Data_From_TSV_File()
     {
         IEstimator<ITransformer> loadedFile = _mlDataLoader.LoadDataFromTSV();
         Assert.NotNull(loadedFile);

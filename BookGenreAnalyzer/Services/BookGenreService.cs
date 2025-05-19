@@ -1,5 +1,4 @@
 ﻿using BookGenreAnalyzer.MachineLearning;
-using Microsoft.ML;
 
 namespace BookGenreAnalyzer.Services;
 

@@ -1,5 +1,4 @@
-﻿using BookGenreAnalyzer.Data;
-using BookGenreAnalyzer.DTOs;
+﻿using BookGenreAnalyzer.DTOs;
 using BookGenreAnalyzer.Models;
 using Microsoft.AspNetCore.Identity;
 

@@ -23,17 +23,13 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost("/api/user/login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto dto)
-    {
-        try
-        {
+    public async Task<IActionResult> Login([FromBody] LoginDto dto) {
+        
+        
             await _userService.LoginAsync(dto);
             return Ok("Login successful.");
-        }
-        catch (InvalidOperationException ex)
-        {
-            return Unauthorized(ex.Message);
-        }
+        
+
 
 
     }

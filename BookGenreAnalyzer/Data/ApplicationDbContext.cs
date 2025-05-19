@@ -14,17 +14,13 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, i
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.ConfigureWarnings(warnings =>
-            warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
-    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<User>().HasData(
-            new User {Id = 1,UserName = "kamiloses", PasswordHash = "kamiloses" });
+        //
+        // modelBuilder.Entity<User>().HasData(
+        //     new User {Id = 1,UserName = "kamiloses", PasswordHash = "kamiloses" });
 
     }
 }

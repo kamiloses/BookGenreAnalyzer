@@ -1,5 +1,6 @@
 using BookGenreAnalyzer.Controller;
 using BookGenreAnalyzer.Data;
+using BookGenreAnalyzer.Exceptions;
 using BookGenreAnalyzer.MachineLearning;
 using BookGenreAnalyzer.Models;
 using BookGenreAnalyzer.Services;
@@ -9,7 +10,7 @@ using Microsoft.ML;
 
 namespace BookGenreAnalyzer
 {
-    public class Program
+    public class Program  //integration tests
     {
         public static async Task Main(string[] args)
         {
@@ -49,7 +50,8 @@ namespace BookGenreAnalyzer
             });
 
             var app = builder.Build();
-
+            app.UseMiddleware<GlobalExceptionMiddleware>();
+            //running UserSeed
             using (var scope = app.Services.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetRequiredService<UserSeed>();
