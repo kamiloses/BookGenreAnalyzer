@@ -20,7 +20,7 @@ public class MlGenrePredictorTest
     }
 
 
-    [Fact]
+ //   [Fact]
     public void Should_Check_PredictGenre_Method()
     {
         

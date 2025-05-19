@@ -17,9 +17,9 @@ public class LoginController : ControllerBase
     }
 
     [HttpGet("/api/user/login")]
-    public ForbidResult LoginPage()
+    public IActionResult LoginPage()
     {
-        return Forbid("You are not logged in");
+        return Unauthorized("You are not logged in");
     }
 
     [HttpPost("/api/user/login")]

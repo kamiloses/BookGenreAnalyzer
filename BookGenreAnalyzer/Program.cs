@@ -7,28 +7,58 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSingleton<MLContext>().AddSingleton<MlDataLoader>().AddSingleton<MlTrainer>().AddSingleton<MlGenrePredictor>().AddSingleton<BookGenreService>().AddScoped<UserService>().AddScoped<LoginController>();
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddControllers();
-
-
-builder.Services.AddIdentity<User, IdentityRole<int>>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
-
-
-builder.Services.ConfigureApplicationCookie(options =>
+namespace BookGenreAnalyzer
 {
-    options.LoginPath = "/api/user/login";
-});
+    public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+            builder.Services.AddScoped<UserSeed>();
 
-app.MapControllers();
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            });
 
-app.MapGet("/", () => "Hello World!");
+            builder.Services
+                .AddSingleton<MLContext>()
+                .AddSingleton<MlDataLoader>()
+                .AddSingleton<MlTrainer>()
+                .AddSingleton<MlGenrePredictor>()
+                .AddSingleton<BookGenreService>()
+                .AddScoped<UserService>()
+                .AddScoped<LoginController>();
 
-app.Run();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddControllers();
+
+            builder.Services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/api/user/login";
+            });
+
+            var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<UserSeed>();
+                await seeder.seedTheUser();
+            }
+
+            app.MapControllers();
+
+            app.Run();
+        }
+    }
+}

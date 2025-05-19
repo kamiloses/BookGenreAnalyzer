@@ -9,7 +9,7 @@ namespace BookGenreAnalyzer.Controller;
 public class BookController : ControllerBase
 {
     private readonly BookGenreService _bookGenreService;
-
+//todo zobacz czy gdzieś handlera nie wrzucic
     public BookController(BookGenreService bookGenreService)
     {
         _bookGenreService = bookGenreService;

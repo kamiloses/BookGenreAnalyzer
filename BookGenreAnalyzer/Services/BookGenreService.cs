@@ -5,14 +5,12 @@ namespace BookGenreAnalyzer.Services;
 
 public class BookGenreService
 {
-    private readonly MLContext _mlContext;
     private readonly MlGenrePredictor _mlPredictor;
     private readonly MlTrainer _mlTrainer;
     private readonly MlDataLoader _mlDataLoader;
 
-    public BookGenreService(MLContext mlContext, MlGenrePredictor mlPredictor, MlTrainer mlTrainer, MlDataLoader mlDataLoader)
+    public BookGenreService(MlGenrePredictor mlPredictor, MlTrainer mlTrainer, MlDataLoader mlDataLoader)
     {
-        _mlContext = mlContext;
         _mlPredictor = mlPredictor;
         _mlTrainer = mlTrainer;
         _mlDataLoader = mlDataLoader;
