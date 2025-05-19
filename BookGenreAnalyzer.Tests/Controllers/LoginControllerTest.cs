@@ -77,6 +77,6 @@ public class LoginControllerTest : IClassFixture<WebApplicationFactory<BookGenre
         Console.BackgroundColor = ConsoleColor.Green;
 
 
-        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
     }
 }
