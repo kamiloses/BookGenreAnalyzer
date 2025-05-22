@@ -37,10 +37,7 @@ public class MlDataLoader
         var filtered = data
             .Where(x => string.Equals(x.Genre?.Trim(), genre.Trim(), StringComparison.OrdinalIgnoreCase))
             .ToList();
-
-        if (filtered.Count == 0)
-            return $"No titles found for genre: {genre}";
-
+        
         var random = new Random();
         var randomTitle = filtered[random.Next(filtered.Count)].Title;
 

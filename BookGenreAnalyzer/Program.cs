@@ -18,10 +18,6 @@ namespace BookGenreAnalyzer
 
             
             
-            //todo usuń potem
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            //
             builder.Services.AddScoped<UserSeed>();
 
             builder.Services.Configure<IdentityOptions>(options =>
@@ -56,10 +52,7 @@ namespace BookGenreAnalyzer
             });
 
             var app = builder.Build();
-//todo usuń potem
-            app.UseSwagger(); app.UseSwaggerUI();
-           //
-            
+
             
             app.UseMiddleware<GlobalExceptionMiddleware>();
             //running UserSeed

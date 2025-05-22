@@ -56,7 +56,7 @@ public class BookControllerTest : IClassFixture<WebApplicationFactory<BookGenreA
     [Fact]
     public async Task Should_Check_If_RecommendBook_Method_Executes()
     {
-        string genre = "commedy";
+        string genre = "comedy";
         
         var response = await _client.GetAsync("/api/book/recommend/"+genre);
         
@@ -82,6 +82,6 @@ public class BookControllerTest : IClassFixture<WebApplicationFactory<BookGenreA
         User newUser = new User() { UserName = username };
         await _userManager.CreateAsync(newUser, password);
 
-        await Task.Delay(500);
+        await Task.Delay(1000);
     }
 }

@@ -9,6 +9,7 @@ public class BookGenreService
     private readonly MlDataLoader _mlDataLoader;
 
     public BookGenreService(MlGenrePredictor mlPredictor, MlTrainer mlTrainer, MlDataLoader mlDataLoader)
+    
     {
         _mlPredictor = mlPredictor;
         _mlTrainer = mlTrainer;
