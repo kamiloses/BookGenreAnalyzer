@@ -16,10 +16,9 @@ public class UserSeed
 
     public async Task seedTheUser()
     {
-        string username = "Kamiloses";
-        string password = "Kamiloses123!";
-
-
+        string username = "Kamiloses";   string password = "Kamiloses123!";
+      
+        
         var existingUser = await _userManager.FindByEmailAsync(username);
 
         if (existingUser == null)
